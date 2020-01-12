@@ -24,7 +24,7 @@ window.onload = () => {
           </tr> 
       </thead><tbody>
   `
-  const response = await fetch(`http://localhost:3000/space/${id_space}track/`)
+  const response = await fetch(`https://gestorespacos.herokuapp.com/space/${id_space}track/`)
   const pistas = await response.json()
   for (const pista of pistas){
     strHtml += `
@@ -40,7 +40,7 @@ window.onload = () => {
 
     
 //local
-    return fetch(`http://localhost:3000/space/7`, {
+    return fetch(`https://gestorespacos.herokuapp.com//space/7`, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
           },          
@@ -60,7 +60,7 @@ window.onload = () => {
 }
 
 //dados do menu
-return fetch(`http://localhost:3000/spacemanager/${user_id}`, {
+return fetch(`https://gestorespacos.herokuapp.com//spacemanager/${user_id}`, {
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
   },          
