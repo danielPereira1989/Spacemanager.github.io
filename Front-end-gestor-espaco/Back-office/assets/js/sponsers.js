@@ -1,7 +1,7 @@
-const urlBase = "http://localhost:3000"
+const urlBase = "https://gestorespacos.herokuapp.com"
 let isNew = true
 
-window.onload = () => {    
+window.onload = () => {
 
     let tblPatrocinadores =document.getElementById("tblPatrocinadores")
 
@@ -13,18 +13,18 @@ window.onload = () => {
 			<tr class='bg-info'>
 			<th class='w-2'>#</th>
 			<th class='w-30'>Nome</th>
-			<th class='w-8'>NIF/NIPC</th>              
-			<th class='w-15'>Contacto</th> 
+			<th class='w-8'>NIF/NIPC</th>
+			<th class='w-15'>Contacto</th>
 			<th class='w-8'>Validade</th>
 			<th class='w-6'>Montante</th>
-			<th class='w-6'>Ações</th> 		    
-                </tr> 
+			<th class='w-6'>Ações</th>
+                </tr>
             </thead><tbody>
-            
+
         `
         console.log('depoistabela')
         //const response = await fetch(`http://localhost:3000/spacemanager/${id_spacemanager}/space/${id_espaco}/sponser/15`)
-        const response = await fetch(`http://localhost:3000/sponser/15`)
+        const response = await fetch(`https://gestorespacos.herokuapp.com/sponser/15`)
         const sponsers = await response.json()
 console.log(sponsers)
         let i = 1
@@ -37,10 +37,10 @@ console.log(sponsers)
 			<td>${sponser.Contacto}</td>
 			<td>${sponser.validade_patrocinio}</td>
 			<td>${sponser.preco_patrocinio}</td>
-	
+
                     <td>
                         <i value='${sponser.id_patrocinador}' id="edit" class="fas fa-edit edit" style ="padding-left: 15px;"  data-toggle='modal' data-target="#EditarPatrocinadores" data-tt="tooltip" data-placement="top" title="Editar" data-animation="true"></i>
-                        <i value='${sponser.id_patrocinador}' id="remove" class='fas fa-trash-alt remove' style ="padding-left: 15px;" data-target="#ApagarPatrocinadores" data-toggle='modal' data-tt="tooltip" data-placement="top" title="Apagar" data-animation="true" >                   
+                        <i value='${sponser.id_patrocinador}' id="remove" class='fas fa-trash-alt remove' style ="padding-left: 15px;" data-target="#ApagarPatrocinadores" data-toggle='modal' data-tt="tooltip" data-placement="top" title="Apagar" data-animation="true" >
                     </td>
                 </tr>
             `
@@ -48,21 +48,21 @@ console.log(sponsers)
         }
         strHtml += "</tbody>"
         tblPatrocinadores.innerHTML = strHtml
-        
-        // Gerir o clique no ícone de Remover        
+
+        // Gerir o clique no ícone de Remover
     ApagarPatrocinador.addEventListener("submit", async (result) => {
-        event.preventDefault()     
-                
+        event.preventDefault()
+
                     if (result.value) {
                         //pedido HTTP para remoção do patrocinador
                         let btnDelete = document.getElementsByClassName("remove")
                         let id = btnDelete[i].getAttribute("value")
                         try {
-                            const response = await fetch(`http://localhost:3000/sponser/del/${id_patrocinador}`, {
+                            const response = await fetch(`https://gestorespacos.herokuapp.com/sponser/del/${id_patrocinador}`, {
                                 method: "DELETE"
                             })
                             if (response.status == 204) {
-                                const id = await response.json() 
+                                const id = await response.json()
                                 swal('Removido!', 'O patrocinador foi removido.', 'success')
                             }
                         } catch (err) {
@@ -74,16 +74,16 @@ console.log(sponsers)
                         }
                         renderSponsers()
                     }
-                
+
             })
         }
         renderSponsers()
-    
+
     console.log(5555789)
-    
+
     }
 
-    // References to HTML objects   
+    // References to HTML objects
     const tblPatrocinadores = document.getElementById("tblPatrocinadores")
     const formPatrocinadores = document.getElementById("formPatrocinadores")
 
@@ -103,7 +103,7 @@ console.log(sponsers)
         if (isNew) {
             console.log('antesdofetchdeAdd')
             // Adiciona Patrocinador
-            response = await fetch(`http://localhost:3000/sponser`, {
+            response = await fetch(`https://gestorespacos.herokuapp.com/sponser`, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
@@ -111,7 +111,7 @@ console.log(sponsers)
                 body: `nome_patrocinador=${nome_patrocinador}&Contacto=${Contacto}&pessoa_contacto=${pessoa_contacto}
                 &NIF=${NIF}&Morada=${Morada}&active=1`
             }).then(function() {
-                fetch(`http://localhost:3000/sponsership`, {
+                fetch(`https://gestorespacos.herokuapp.com/sponsership`, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
@@ -120,12 +120,12 @@ console.log(sponsers)
                     &notas=${txtNotas}&active=1`
 
                }  ) })
-        
+
             const newid_patrocinador = response.headers.get("Location")
             const newSponser= await response.json()
         }
         isNew = true
-      
+
         console.log(900999)
         formPatrocinadores.reset()
         let strHtml = `
@@ -134,35 +134,35 @@ console.log(sponsers)
 			<tr class='bg-info'>
 			<th class='w-2'>#</th>
 			<th class='w-50'>Nome</th>
-			<th class='w-8'>NIF/NIPC</th>              
-			<th class='w-15'>Contacto</th> 
+			<th class='w-8'>NIF/NIPC</th>
+			<th class='w-15'>Contacto</th>
 			<th class='w-8'>Validade</th>
 			<th class='w-6'>Montante</th>
-			<th class='w-6'>Ações</th> 		    
-                </tr> 
-            </thead><tbody>           
-        `   
-    }) 
+			<th class='w-6'>Ações</th>
+                </tr>
+            </thead><tbody>
+        `
+    })
 
 
 //EDITAR TABELA
-        
-// Gerir o clique no ícone de Editar        
 
-//pre preencher o form 
+// Gerir o clique no ícone de Editar
+
+//pre preencher o form
     const EditarDados = document.getElementById("edit");
     const form = document.getElementsById("formEditarPatrocinadores");
 
     EditarDados.addEventListener("onclick", async(event) => {
     event.preventDefault()
-    await fetch (`http://localhost:3000/sponser/${id_patrocinador}` , {
-    headers: { 
+    await fetch (`https://gestorespacos.herokuapp.com/sponser/${id_patrocinador}` , {
+    headers: {
         "Content-Type": "application/x-www-form-urlencoded"
     },
     method: "GET",
 }).then (function() {
     fetch (`http://localhost:3000/sponser/${id_patrocinador}` , {
-        headers: { 
+        headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
         method: "GET",
@@ -183,7 +183,7 @@ const p= response.json();
         document.getElementById("NIF").value = p.NIF
         document.getElementById("Morada").value = p.Morada
         document.getElementById("validade_patrocinio").value = p.validade_patrocinio
-        document.getElementById("txtNotas").value = p.Notas    
+        document.getElementById("txtNotas").value = p.Notas
 })
     })
 
@@ -196,8 +196,8 @@ const p= response.json();
             formEditarPatrocinadores.addEventListener("submit", async (event) => {
             event.preventDefault()
             console.log('antesdofetchAtuailizarPat')
-            fetch(`http://localhost:3000/sponser/${id_patrocinador}`, {
-                headers: { 
+            fetch(`https://gestorespacos.herokuapp.com/sponser/${id_patrocinador}`, {
+                headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 method: "PUT",
@@ -205,7 +205,7 @@ const p= response.json();
                 &NIF=${NIF}&Morada=${Morada}&active=1`
             }).then(function(){
                 fetch(`http://localhost:3000/sponsership/${id_patrocinador}`, {
-                    headers: { 
+                    headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
                     method: "PUT",

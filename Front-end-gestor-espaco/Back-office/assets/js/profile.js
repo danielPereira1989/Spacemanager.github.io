@@ -1,19 +1,19 @@
-const response1 = await fetch(`http://localhost:3000/spacemanager/email`);
+const response1 = await fetch(`https://gestorespacos.herokuapp.com/spacemanager/email`);
     const spacemanagers = await response1.json();
 
     const spacemanager = spacemanagers[0];
-    
+
     console.log(spacemanager.resultado);
-    
+
 /*window.onload = () => {
     setCookie("user_id", 40, 300);
     let user_id = getCookie("user_id");
-    
+
     //fetch para buscar os dados e apresentar na página
     return fetch(`http://localhost:3000/spacemanager/${user_id}`, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
-          },          
+          },
           method: "GET"
         })
           .then(response => {
@@ -51,7 +51,7 @@ preencherForm.addEventListener("onclick", async (event) => {
   return fetch(`http://localhost:3000/spacemanager/${user_id}`, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
-    },          
+    },
     method: "GET"
   })
     .then(response => {
@@ -61,7 +61,7 @@ preencherForm.addEventListener("onclick", async (event) => {
       const p = response.json();
       document.getElementById("editarNome").innerHTML.valueOf= p.nome_gestor_espaco;
 }
-) 
+)
 })
 
 
@@ -81,7 +81,7 @@ submeterNome.addEventListener("submit", async (event) =>{
   await fetch(`http://localhost:3000/spacemanager/${user_id}`,{
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
-    },          
+    },
     method: "GET"
   })
     .then(response => {
@@ -101,7 +101,7 @@ submeterNome.addEventListener("submit", async (event) =>{
     const txtNome = document.getElementById("nome").value;
 
     fetch(`http://localhost:3000/spacemanager/${user_id}`, {
-      headers: {"Content-Type": "application/x-www-form-urlencoded"},          
+      headers: {"Content-Type": "application/x-www-form-urlencoded"},
       method: "PUT",
       body:
       `nome_gestor_espaco=${txtNome}&morada=${txtMorada}&password=${txtPassword}

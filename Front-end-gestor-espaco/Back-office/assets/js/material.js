@@ -1,15 +1,15 @@
 
 
     //chamada fetch para envio dos dados para o servior via POST
-    
+
     window.onload = () => {
-    
-    
+
+
      let space_manager = getCookie("id_gestor_espaco");   //NOT SURE
-     
+
     const tblMateriais = document.getElementById("cardInventario");
-   
-    const formMateriais = document.getElementById("formMateriais"); 
+
+    const formMateriais = document.getElementById("formMateriais");
     formMateriais.addEventListener("submit", async (event) => {
         event.preventDefault()
         const referencia_material = document.getElementById("referencia_material").value
@@ -17,12 +17,12 @@
         const descricao = document.getElementById("descricao").value
         const quantidade = document.getElementById("quantidade").value
       const txtMaterial = document.getElementById("txtMaterial").value
-     // Verifica flag isNew para saber se se trata de uma adição ou de um atualização dos dados 
+     // Verifica flag isNew para saber se se trata de uma adição ou de um atualização dos dados
         let response
         let isNew = true
         if (isNew) {
             // Adiciona Material
-            response = await fetch('http://localhost:3000/materials', { 
+            response = await fetch('https://gestorespacos.herokuapp.com/materials', { 
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
@@ -46,7 +46,7 @@
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 method: "GET",
-                
+
             })
 
             const newMaterial = await response.json()
@@ -54,7 +54,7 @@
         isNew = true
         renderMaterial()
     })
-    
+
     const renderMaterial = async () => {
         formMateriais.reset()
         let strHtml = `
@@ -63,10 +63,10 @@
                 <tr class='bg-info'>
                     <th class='w-2'>#</th>
                     <th class='w-50'>Referencia do Material</th>
-                    <th class='w-38'>Nome do Material</th>              
-                    <th class='w-50'>Descrição</th>  
+                    <th class='w-38'>Nome do Material</th>
+                    <th class='w-50'>Descrição</th>
                     <th class='w-6'>Quantidade</th>
-                </tr> 
+                </tr>
             </thead><tbody>
         `
         const response = await fetch(`${urlBase}/materials`)
@@ -91,7 +91,7 @@
         strHtml += "</tbody>"
         tblMateriais.innerHTML = strHtml
 
-        // Gerir o clique no ícone de Editar        
+        // Gerir o clique no ícone de Editar
         const btnEdit = document.getElementsByClassName("edit")
         for (let i = 0; i < btnEdit.length; i++) {
             btnEdit[i].addEventListener("click", () => {
@@ -108,7 +108,7 @@
             })
         }
 
-        // Gerir o clique no ícone de Remover        
+        // Gerir o clique no ícone de Remover
         const btnDelete = document.getElementsByClassName("remove")
         for (let i = 0; i < btnDelete.length; i++) {
             btnDelete[i].addEventListener("click", () => {

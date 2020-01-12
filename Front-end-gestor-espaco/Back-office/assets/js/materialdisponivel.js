@@ -1,24 +1,24 @@
     //chamada fetch para envio dos dados para o servior via POST
-    
+
     window.onload = () => {
-    
-    
+
+
      let space_manager = getCookie("id_gestor_espaco");   //NOT SURE
-     
-     const formMatDispon = document.getElementById("formMatDispon"); 
+
+     const formMatDispon = document.getElementById("formMatDispon");
      formMatDispon.addEventListener("submit", async (event) => {
         event.preventDefault()
         const referencia_material = document.getElementById("referencia_material").value
         const nome_material = document.getElementById("nome_material").value
         const descricao = document.getElementById("descricao").value
         const quantidade = document.getElementById("quantidade").value
-     
-     // Verifica flag isNew para saber se se trata de uma adição ou de um atualização dos dados 
+
+     // Verifica flag isNew para saber se se trata de uma adição ou de um atualização dos dados
         let response
         let isNew = true
         if (isNew) {
             // Adiciona Material
-            response = await fetch('http://localhost:3000/materials', { 
+            response = await fetch('https://gestorespacos.herokuapp.com/materials', { 
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
@@ -32,10 +32,10 @@
 //CRIAR A TABELA --> Fazer GET --> quando terminar, eliminar tabela do html
 
 
-     
 
-    
-    
+
+
+
     function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);

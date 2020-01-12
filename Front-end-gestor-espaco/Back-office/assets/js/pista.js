@@ -1,12 +1,12 @@
 let isNew = true
-window.onload = () => { 
-    const tblScheduleTrack = document.getElementById("tblScheduleTrack")  
-    
+window.onload = () => {
+    const tblScheduleTrack = document.getElementById("tblScheduleTrack")
+
     function refreshTracks(){
         event.preventDefault()
-        return fetch(`http://localhots:3000/track/${idTrack}` , {
+        return fetch(`https://gestorespacos.herokuapp.com/track/${idTrack}` , {
         headers: { "Content-Type": "application/x-www-form-urlencoded"},
-        method:"GET", 
+        method:"GET",
     })
         .then(response => {
             if(!response.ok) {
@@ -22,9 +22,9 @@ window.onload = () => {
 
             .then(async()  => {
                 event.preventDefault()
-                const x = await fetch (`http://localhots:3000/track/${idTrack}/schedule_track`,{
+                const x = await fetch (`https://gestorespacos.herokuapp.com/track/${idTrack}/schedule_track`,{
                 headers: { "Content-Type": "application/x-www-form-urlencoded"},
-                method:"GET", 
+                method:"GET",
                 })
 
                 const schedule = response.json();
@@ -36,14 +36,14 @@ window.onload = () => {
                        </thead>
                     `
                     let i = 1
-                    for (const track of track) {          
+                    for (const track of track) {
                         strHtml += `
                             <tr>
                                 <td>${schedule.day}</td>
                                 <td>${schedule.initial_time}</td>
                                 <td>${schedule.final_time}</td>
                             </tr>
-                        `        
+                        `
                         i++
                     }
                     strHtml += "</tbody>"
@@ -59,9 +59,9 @@ window.onload = () => {
     const btnEditPista = document.getElementById("editPista");
 	btnEditPista.addEventListener("onclick", async (event) => {
         event.preventDefault()
-        return fetch(`http://localhots:3000/track/${idTrack}` , {
+        return fetch(`https://gestorespacos.herokuapp.com/track/${idTrack}` , {
         headers: { "Content-Type": "application/x-www-form-urlencoded"},
-        method:"GET", 
+        method:"GET",
     })
         .then(response => {
             if(!response.ok) {
@@ -74,19 +74,19 @@ window.onload = () => {
             document.getElementById("idTracktype_fk").innerHTML = p.idTracktype_fk;
 
             renderSechule();
-          
+
  })
   .catch(error => {
       //swal.showValidationError(`Pedido falhado : ${error}`);
   })
 })
-    
-    
+
+
         const formEditPista = document.getElementById("formEditPista")
         formEditPista.addEventListener("submit", async(event) => {
         valform()
         isNew = false
-        event.preventDefault()   
+        event.preventDefault()
         for(track of track){
             document.getElementById("track_name").value = track.track_name
             document.getElementById("capacity").value = track.capacity
@@ -100,7 +100,7 @@ window.onload = () => {
         }
 
 
-            response = await fetch(`http://localhost:3000/track/${id_pista}`, {
+            response = await fetch(`https://gestorespacos.herokuapp.com/track/${id_pista}`, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
@@ -119,7 +119,7 @@ window.onload = () => {
                     }
                 }
 
-                response = await fetch(`http://localhost:3000/track/${id_pista}/schedule_track`, {
+                response = await fetch(`https://gestorespacos.herokuapp.com/track/${id_pista}/schedule_track`, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
@@ -127,7 +127,7 @@ window.onload = () => {
                     body: `obj_schedule_track=${schedule_track}`
                 })
 
-                
+
                /* for (let i = 0; i < schedule_track.length; i++) {
                 for (const schedule_track of schedule_track) {
                     if (schedule_track.idTrack == schedule_track[i].getAttribute("id")) {
@@ -139,6 +139,3 @@ window.onload = () => {
             }*/
          })
      })
-   
-
-
